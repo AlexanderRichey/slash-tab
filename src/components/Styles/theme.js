@@ -24,6 +24,7 @@ export default {
     white: "#fff",
     blueBg: "#f6f8fa",
     veryLightGray: "#fafbfc",
+    prettyLightGray: "#f3f3f3",
     lightGray: "#e1e4e8",
     darkGray: "#3d3d3d"
   },

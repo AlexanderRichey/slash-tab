@@ -34,14 +34,14 @@ export default function DataProvider({ children }) {
 
   useEffect(() => {
     if (didRestore.current) {
-      new Promise(resolve =>
+      new Promise(() =>
         chrome.storage.local.set(
           { redux: JSON.stringify(omit(tabs, ["open"])) },
-          () => console.log("saved")
+          () => {}
         )
       );
     }
-  }, [tabs]);
+  }, [tabs.saved, tabs.sets]);
 
   return (
     <DataContext.Provider value={{ tabs, dispatch }}>

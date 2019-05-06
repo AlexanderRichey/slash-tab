@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { themeGet } from "styled-system";
 import { SortableElement } from "react-sortable-hoc";
 
 import { DataContext } from "../redux";
@@ -11,6 +12,7 @@ const Controls = styled(Box)`
   visibility: hidden;
   opacity: 0;
   flex-direction: row;
+  flex-shrink: 0;
 `;
 
 const Wrapper = styled.a`
@@ -23,10 +25,12 @@ const Wrapper = styled.a`
     opacity: 1;
   }
   &:hover {
-    background-color: #f3f3f3;
+    background-color: ${themeGet("colors.prettyLightGray")};
+    border: 1px solid ${themeGet("colors.lightGray")};
   }
   padding: 0.3rem 1rem;
   border-radius: 4px;
+  border: 1px solid transparent;
   transition: all 0.2s ease;
 `;
 
@@ -67,9 +71,10 @@ export default SortableElement(({ tab }) => {
             mr="1rem"
             height="1.8rem"
             width="1.8rem"
+            flexShrink="0"
           />
         </Box>
-        <Box flexDirection="column">
+        <Box flexDirection="column" flexShrink="10">
           <EditableTitle
             value={tab.title}
             handleUpdate={handleUpdate}

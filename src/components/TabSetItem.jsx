@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
+import { themeGet } from "styled-system";
 import distanceInWordsToNow from "date-fns/distance_in_words_to_now";
 import differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 import { SortableElement } from "react-sortable-hoc";
@@ -16,7 +17,12 @@ const ListItem = styled.li`
   padding: 1rem 2rem;
   border-bottom: 1px solid #e1e4e8;
   transition: all 0.2s ease;
-  background-color: ${props => (props.isHoverOver ? "lightyellow" : "white")};
+  cursor: pointer;
+  background-color: ${props =>
+    props.isHoverOver ? "lightyellow" : themeGet("colors.white")};
+  &:hover {
+    background-color: ${themeGet("colors.veryLightGray")};
+  }
 `;
 
 const FaviconList = ({ tabs }) => (
