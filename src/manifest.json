@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "Tabs",
+  "version": "0.1",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "chrome_url_overrides" : {
+    "bookmarks": "app.html"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' blob: filesystem: chrome-extension-resource:; object-src 'self' blob: filesystem:;"
+}
