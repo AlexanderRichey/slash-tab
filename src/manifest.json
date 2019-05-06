@@ -6,6 +6,16 @@
     "tabs",
     "storage"
   ],
+  "icons": {
+    "16": "icon-16x16.png",
+    "32": "icon-32x32.png",
+    "96": "icon-96x96.png",
+    "120": "icon-120x120.png",
+    "144": "icon-144x144.png",
+    "180": "icon-180x180.png",
+    "310": "icon-310x310.png",
+    "400": "icon-400x400.png"
+  },
   "chrome_url_overrides" : {
     "bookmarks": "app.html"
   },

@@ -127,10 +127,9 @@ export default SortableElement(({ tabSet }) => {
     dispatch({
       type: "REORDER_SAVED_TABS",
       payload: {
-        tabs: reorder(filteredTabs, oldIndex, newIndex).map((tab, idx) => {
-          tab.priority = idx;
-          return tab;
-        }),
+        tabs: reorder(filteredTabs, oldIndex, newIndex).map((tab, idx) =>
+          Object.assign(tab, { idx })
+        ),
         setId: tabSet.id
       }
     });

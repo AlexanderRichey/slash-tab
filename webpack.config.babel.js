@@ -43,6 +43,11 @@ module.exports = {
         from: "src/manifest.json",
         to: path.join(__dirname, "dst"),
         flatten: true
+      },
+      {
+        from: "src/*.png",
+        to: path.join(__dirname, "dst"),
+        flatten: true
       }
     ])
   ],
