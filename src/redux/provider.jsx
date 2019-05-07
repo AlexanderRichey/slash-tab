@@ -7,6 +7,7 @@ export default function DataProvider({ children }) {
   const [tabs, dispatch] = useReducer(reducer, initialState);
   const didRestore = useRef(false);
 
+  // Load data on startup
   useEffect(() => {
     chrome.storage.local.get(["redux"], result => {
       let restored;
@@ -32,6 +33,7 @@ export default function DataProvider({ children }) {
     });
   }, []);
 
+  // Save data every time a redux action is dispatched
   useEffect(() => {
     if (didRestore.current) {
       new Promise(() =>
@@ -42,6 +44,31 @@ export default function DataProvider({ children }) {
       );
     }
   }, [tabs.saved, tabs.sets]);
+
+  // When the window does not have focus, listen for changes to storage
+  // made by the popup and restore from storage to keep up to date
+  useEffect(() => {
+    function otherWindowListener(changes, areaName) {
+      if (!document.hasFocus() && areaName === "local" && didRestore) {
+        let restored;
+
+        try {
+          restored = JSON.parse(changes.redux.newValue);
+        } catch (e) {
+          return console.error(e);
+        }
+
+        dispatch({
+          type: "RESTORE",
+          payload: restored
+        });
+      }
+    }
+
+    chrome.storage.onChanged.addListener(otherWindowListener);
+
+    return () => chrome.storage.onChanged.removeListener(otherWindowListener);
+  }, []);
 
   return (
     <DataContext.Provider value={{ tabs, dispatch }}>
