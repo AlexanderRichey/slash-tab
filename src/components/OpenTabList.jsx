@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react";
+import pick from "lodash/pick";
 import { DataContext } from "../redux";
 import OpenTabItem from "./OpenTabItem";
+
+const TAB_FIELDS = ["id", "title", "url", "favIconUrl"];
 
 export default () => {
   const { tabs, dispatch } = useContext(DataContext);
@@ -8,14 +11,20 @@ export default () => {
   // Get the tabs when the component mounts
   useEffect(() => {
     chrome.tabs.query({ currentWindow: true }, tabs => {
-      dispatch({ type: "PUT_OPEN_TABS", payload: tabs });
+      dispatch({
+        type: "PUT_OPEN_TABS",
+        payload: tabs.map(tab => pick(tab, TAB_FIELDS))
+      });
     });
   }, []);
 
   // Watch for changes among tabs
   useEffect(() => {
     function handleTabCreation(tab) {
-      dispatch({ type: "PUT_OPEN_TABS", payload: [tab] });
+      dispatch({
+        type: "PUT_OPEN_TABS",
+        payload: [pick(tab, TAB_FIELDS)]
+      });
     }
 
     function handleTabDeletion(tabId) {
@@ -23,7 +32,10 @@ export default () => {
     }
 
     function handleTabUpdate(tabId, changeInfo, tab) {
-      dispatch({ type: "UPDATE_OPEN_TAB", payload: { tab } });
+      dispatch({
+        type: "UPDATE_OPEN_TAB",
+        payload: { tab: pick(tab, TAB_FIELDS) }
+      });
     }
 
     chrome.tabs.onCreated.addListener(handleTabCreation);
