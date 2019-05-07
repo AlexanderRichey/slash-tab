@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { DataContext } from "../redux";
 import TabSetList from "./TabSetList";
 import Header from "./Header";
-import { Box } from "./Styles";
+import { Box, Text, Icon } from "./Styles";
 import { decodeDragData } from "../helpers/dragging";
 
 const Container = styled(Box)`
@@ -14,14 +14,14 @@ const Container = styled(Box)`
 `;
 
 export default () => {
-  const { dispatch } = useContext(DataContext);
+  const { tabs, dispatch } = useContext(DataContext);
   const timeout = useRef(null);
   const [isHoverOver, setIsHoverOver] = useState(false);
 
   function handleDragOver(e) {
     e.preventDefault();
 
-    if (e.target.id !== "tabsets-continaer") {
+    if (e.target.dataset.drag !== "tabsets-container") {
       return;
     }
 
@@ -36,7 +36,7 @@ export default () => {
   function handleDrop(e) {
     e.preventDefault();
 
-    if (e.target.id !== "tabsets-continaer") {
+    if (e.target.dataset.drag !== "tabsets-container") {
       return;
     }
 
@@ -59,10 +59,27 @@ export default () => {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       isHoverOver={isHoverOver}
-      id="tabsets-continaer"
+      data-drag="tabsets-container"
     >
       <Header />
-      <TabSetList />
+      {tabs.sets.length ? (
+        <TabSetList />
+      ) : (
+        <Box
+          width="100%"
+          height="100%"
+          alignItems="center"
+          justifyContent="center"
+          data-drag="tabsets-container"
+        >
+          <Box width="25rem" pb="4rem" alignItems="center">
+            <Icon name="tab" fontSize="45px" mb="1rem" />
+            <Text textAlign="center" fontSize={2} fontWeight="500">
+              Drag and drop tabs from the sidebar to get started.
+            </Text>
+          </Box>
+        </Box>
+      )}
     </Container>
   );
 };
