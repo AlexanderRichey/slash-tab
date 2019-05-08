@@ -18,6 +18,24 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
+const IntroText = () => (
+  <Box width="100%" height="100%" alignItems="center" justifyContent="center">
+    <Box width="20rem">
+      <Text textAlign="center" fontSize={1} fontWeight="500">
+        Save the current tab to a new group or click{" "}
+        <Icon
+          name="open_in_new"
+          fontSize="20px"
+          display="inline"
+          ml="0rem"
+          style={{ verticalAlign: "bottom" }}
+        />{" "}
+        to manage all your tabs.
+      </Text>
+    </Box>
+  </Box>
+);
+
 export default () => {
   const { tabs, dispatch } = useContext(DataContext);
   const [currentTab, setCurrentTab] = useState({});
@@ -72,10 +90,11 @@ export default () => {
           ml="1rem"
           onClick={handleOpenBookmarks}
         >
-          <Icon name="open_in_new" />
+          <Icon ml="0rem" name="open_in_new" />
         </Button>
       </ButtonContainer>
       <Box height="6rem" flexShrink="0" />
+      {tabs.sets.length <= 0 && <IntroText />}
       <ol>
         {tabs.sets.map(tabSet => (
           <PopupTabSetItem

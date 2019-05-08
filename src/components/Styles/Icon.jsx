@@ -7,12 +7,13 @@ import {
   height,
   fontSize,
   flex,
-  alignSelf
+  alignSelf,
+  display
 } from "styled-system";
 import { cursor, float } from "./utils";
 
 const Icon = styled.i`
-  display: flex;
+  ${display}
   ${flex}
   ${space}
   ${color}
@@ -31,6 +32,7 @@ const Icon = styled.i`
 `;
 
 Icon.defaultProps = {
+  display: "flex",
   flexDirection: "column",
   className: "material-icons",
   cursor: "pointer",
@@ -39,9 +41,5 @@ Icon.defaultProps = {
 
 export default props => {
   const { name, ...rest } = props;
-  return (
-    <Icon ml="-0.4rem" {...rest}>
-      {name}
-    </Icon>
-  );
+  return <Icon {...rest}>{name}</Icon>;
 };

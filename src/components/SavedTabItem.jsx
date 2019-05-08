@@ -102,27 +102,27 @@ export default SortableElement(({ tab }) => {
         <Icon
           as="button"
           alt="delete"
-          ml="0.6rem"
+          ml="1rem"
           onClick={handleDelete}
           name="delete_forever"
         />
         <Icon
           as="button"
           alt="edit"
-          ml="0.6rem"
+          ml="1rem"
           name="edit"
           onClick={toggleIsEditing}
         />
         <Icon
           alt="reorder"
-          ml="0.6rem"
+          ml="1rem"
           name="reorder"
           cursor="grab"
           onDragStart={handleDragStart}
           draggable="true"
           data-reorder="tab"
         />
-        <Icon as="button" alt="open" ml="0.6rem" name="open_in_new" />
+        <Icon as="button" alt="open" ml="1rem" name="open_in_new" />
       </Controls>
     </Wrapper>
   );

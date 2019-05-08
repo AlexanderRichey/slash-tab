@@ -7,7 +7,9 @@
 - [X] Persistence
 - [X] Popover
 - [X] Reorder tabs within groups
-- [ ] Help text
-- [ ] Icon
+- [X] Help text
+- [X] Icon
+- [ ] Show tabs across all windows
+- [ ] Search
 - [ ] Readme
 - [ ] Move tab from one group to another
