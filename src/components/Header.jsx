@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { themeGet } from "styled-system";
+
+import Search from "./Search";
 import CreateTabSetButton from "./CreateTabSetButton";
 import { Box, Text } from "./Styles";
 
@@ -19,9 +21,11 @@ const Wrap = styled(Box)`
 `;
 
 const AppName = () => (
-  <Text fontWeight="bold" fontSize="16px">
-    \t
-  </Text>
+  <Box width="13rem">
+    <Text fontWeight="bold" fontSize="16px">
+      \t
+    </Text>
+  </Box>
 );
 
 export default () => (
@@ -33,6 +37,7 @@ export default () => (
       alignItems="center"
     >
       <AppName />
+      <Search />
       <CreateTabSetButton />
     </Wrap>
     <Box height="59px" width="100%" flexShrink="0" />

@@ -18,13 +18,18 @@ const createTabSet = (isOpen = false) => ({
 export const initialState = {
   open: [],
   saved: [],
-  sets: []
+  sets: [],
+  query: ""
 };
 
 export default function reducer(state, action) {
   switch (action.type) {
     case "RESTORE":
-      return Object.assign({}, action.payload, { open: state.open });
+      return Object.assign({}, initialState, action.payload, {
+        open: state.open
+      });
+    case "QUERY":
+      return Object.assign({}, state, { query: action.payload });
     case "PUT_OPEN_TABS":
       return Object.assign({}, state, {
         open: state.open.concat(

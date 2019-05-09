@@ -9,7 +9,6 @@
 - [X] Reorder tabs within groups
 - [X] Help text
 - [X] Icon
-- [ ] Show tabs across all windows
-- [ ] Search
+- [X] Show tabs across all windows
+- [X] Search
 - [ ] Readme
-- [ ] Move tab from one group to another

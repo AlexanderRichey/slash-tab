@@ -84,7 +84,19 @@ export default SortableElement(({ tabSet }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const filteredTabs = sortBy(
-    tabs.saved.filter(tab => tab.setId === tabSet.id),
+    tabs.saved.filter(tab => {
+      if (tab.setId === tabSet.id) {
+        if (tabs.query.length > 0) {
+          // Handle search
+          return tab.title
+            .concat(tab.url)
+            .toLowerCase()
+            .includes(tabs.query);
+        } else {
+          return true;
+        }
+      }
+    }),
     ["idx"]
   );
   const tabsCount = filteredTabs.length;
@@ -173,6 +185,8 @@ export default SortableElement(({ tabSet }) => {
     }
   }, []);
 
+  if (!tabsCount) return <div />;
+
   return (
     <ListItem
       onDragOver={handleDragOver}
@@ -229,7 +243,7 @@ export default SortableElement(({ tabSet }) => {
         </Box>
       </Box>
       <SavedTabList
-        isOpen={tabSet.isOpen}
+        isOpen={tabs.query.length ? true : tabSet.isOpen}
         tabs={filteredTabs}
         handleReorder={handleReorder}
       />

@@ -10,7 +10,7 @@ export default () => {
 
   // Get the tabs when the component mounts
   useEffect(() => {
-    chrome.tabs.query({ currentWindow: true }, tabs => {
+    chrome.tabs.query({}, tabs => {
       dispatch({
         type: "PUT_OPEN_TABS",
         payload: tabs.map(tab => pick(tab, TAB_FIELDS))
