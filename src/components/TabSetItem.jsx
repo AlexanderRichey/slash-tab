@@ -7,75 +7,39 @@ import { SortableElement } from "react-sortable-hoc";
 import sortBy from "lodash/sortBy";
 
 import EditableTitle from "./EditableTitle";
+import Controls from "./TabSetControls";
 import SavedTabList from "./SavedTabList";
+import FaviconList from "./FaviconList";
 import { DataContext } from "../redux";
 import { Box, Text, Icon, theme } from "./Styles";
 import { decodeDragData, reorder } from "../helpers/dragging";
 
 const ListItem = styled.li`
-  list-style: none;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #e1e4e8;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  background-color: ${props =>
-    props.isHoverOver ? "lightyellow" : themeGet("colors.white")};
-  &:hover {
-    background-color: ${themeGet("colors.veryLightGray")};
-  }
+  ${props => {
+    if (props.closed) {
+      return `
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 0;
+        border: 0;
+      `;
+    } else {
+      return `
+        list-style: none;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e1e4e8;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background-color: ${
+          props.isHoverOver ? "lightyellow" : props.theme.colors.white
+        };
+        &:hover {
+          background-color: ${props.theme.colors.veryLightGray}};
+        }`;
+    }
+  }}
 `;
-
-const FaviconList = ({ tabs }) => (
-  <Box as="ol" flexDirection="row" mr="1rem">
-    {tabs.slice(0, 5).map(tab => (
-      <Box
-        key={tab.id}
-        as="img"
-        src={tab.favIconUrl}
-        height="1.6rem"
-        width="1.6rem"
-        mr="0.4rem"
-      />
-    ))}
-  </Box>
-);
-
-const Controls = ({ isOpen, handleDelete, toggleIsEditing, handleOpenAll }) => (
-  <>
-    {isOpen && (
-      <>
-        <Icon
-          as="button"
-          alt="delete"
-          mr="1rem"
-          name="delete_forever"
-          onClick={handleDelete}
-        />
-        <Icon
-          as="button"
-          alt="edit"
-          mr="1rem"
-          name="edit"
-          onClick={toggleIsEditing}
-        />
-      </>
-    )}
-    <Icon
-      alt="reorder"
-      mr="1rem"
-      name="reorder"
-      cursor="grab"
-      data-reorder="tabset"
-    />
-    <Icon
-      as="button"
-      alt="open all"
-      mr="1rem"
-      name="open_in_new"
-      onClick={handleOpenAll}
-    />
-  </>
-);
 
 export default SortableElement(({ tabSet }) => {
   const timeout = useRef(null);
@@ -185,7 +149,7 @@ export default SortableElement(({ tabSet }) => {
     }
   }, []);
 
-  if (!tabsCount) return <div />;
+  if (!tabsCount && tabs.query.length > 0) return <ListItem closed />;
 
   return (
     <ListItem
