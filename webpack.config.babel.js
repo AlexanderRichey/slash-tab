@@ -28,11 +28,11 @@ module.exports = {
     minimize: false
   },
   plugins: [
-    // new webpack.DefinePlugin({
-    //   "process.env": {
-    //     NODE_ENV: JSON.stringify("production")
-    //   }
-    // }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
     new CopyWebpackPlugin([
       {
         from: "src/*.html",
