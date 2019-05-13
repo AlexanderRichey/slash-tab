@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Slash Tab",
   "short_name": "\\t",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Manage your tabs in a beautiful interface",
   "homepage_url": "https://github.com/AlexanderRichey/slash-tab",
   "permissions": [
