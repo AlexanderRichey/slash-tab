@@ -15,3 +15,11 @@ The name `\t` comes from the escape sequence for a whitespace tab character used
 - Sort tabs and groups
 - Open all tabs in a group simultaneously
 - Rename tabs and groups
+
+### Build
+
+- Make sure `yarn` and `node` are installed at the versions specified in `package.json`.
+
+```
+$ make
+```

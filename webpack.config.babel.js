@@ -62,12 +62,14 @@ module.exports = (env, argv) => {
       })
     );
 
-    config.plugins.push(
-      new SentryWebpackPlugin({
-        include: ".",
-        ignore: ["node_modules", "webpack.config.babel.js"]
-      })
-    );
+    if (env.RELEASE != "0") {
+      config.plugins.push(
+        new SentryWebpackPlugin({
+          include: ".",
+          ignore: ["node_modules", "webpack.config.babel.js"]
+        })
+      );
+    }
   }
 
   if (argv.mode === "development") {

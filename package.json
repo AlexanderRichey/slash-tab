@@ -5,8 +5,13 @@
   "author": "Alexander Richey",
   "license": "CC-BY-NC-4.0",
   "private": false,
+  "engines": {
+    "node": ">=12.4.0",
+    "yarn": ">=1.22.0"
+  },
   "scripts": {
-    "build": "webpack --mode=production --env.RELEASE=$(git rev-parse HEAD)",
+    "build": "webpack --mode=production --env.RELEASE=0",
+    "release": "webpack --mode=production --env.RELEASE=$(git rev-parse HEAD)",
     "watch": "webpack --mode=development --env.RELEASE=development --watch"
   },
   "dependencies": {
