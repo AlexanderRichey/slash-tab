@@ -71,7 +71,7 @@ export default () => {
   }
 
   function handleOpenBookmarks() {
-    chrome.tabs.create({ url: "chrome://bookmarks/" });
+    chrome.tabs.create({ url: "app.html" });
   }
 
   return (

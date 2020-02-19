@@ -16,11 +16,8 @@
     "96": "icon-96x96.png",
     "128": "icon-128x128.png"
   },
-  "chrome_url_overrides" : {
-    "bookmarks": "app.html"
-  },
   "browser_action": {
     "default_popup": "popup.html"
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval' blob: filesystem: chrome-extension-resource:; object-src 'self' blob: filesystem:;"
+  "content_security_policy": "script-src 'self' blob: filesystem:; object-src 'self' blob: filesystem:;"
 }
